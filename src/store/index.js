@@ -9,33 +9,45 @@ export default new Vuex.Store({
     ...sourceData,
     authId: 'VXjpr2WHa8Ux4Bnggym8QFLdv5C3'
   },
+
   getters: {
     authUser(state) {
       return state.users[state.authId];
     }
   },
+
   actions: {
-    createPost(context, post) {
+    createPost({ commit, state }, post) {
       const postId =
         'greatPost' +
         Math.random()
           .toString()
           .replace('.', '');
       post['.key'] = postId;
-      context.commit('setPost', { post, postId });
-      // Adding the post id to thread
-      context.commit('appendPostIdToThread', {
+
+      post.publishedAt = Math.floor(Date.now() / 1000);
+      post.userId = state.authId;
+      commit('setPost', { post, postId });
+      commit('appendPostIdToThread', {
         postId,
         threadId: post.threadId
       });
-      // Adding the post id to user
-      context.commit('appendPostIdToUser', { post, userId: post.userId });
+      commit('appendPostIdToUser', { post, userId: post.userId });
+    },
+    updateUser({ commit }, user) {
+      commit('setUser', { userId: user['.key'], user });
     }
   },
+
   mutations: {
     setPost(state, { post, postId }) {
       Vue.set(state.posts, postId, post);
     },
+
+    setUser(state, { userId, user }) {
+      Vue.set(state.users, userId, user);
+    },
+
     appendPostIdToThread(state, { postId, threadId }) {
       const thread = state.threads[threadId];
       Vue.set(thread.posts, postId, postId);

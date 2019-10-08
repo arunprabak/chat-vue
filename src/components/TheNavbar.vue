@@ -1,6 +1,6 @@
 <template>
   <header class="header" id="header">
-    <router-link to="{name:'Home'}" class="logo">
+    <router-link :to="{name:'Home'}" class="logo">
       <img src="../assets/img/vueschool-logo.svg" />
     </router-link>
 
@@ -15,13 +15,13 @@
     <nav class="navbar">
       <ul>
         <li class="navbar-user">
-          <a href="#">
+          <router-link :to="{name:'Profile'}">
             <img class="avatar-small" :src="user.avatar" :alt="user.avatar" />
             <span>
               {{user.name}}
-              <img class="icon-profile" src="assets/img/svg/arrow-profile.svg" alt />
+              <img class="icon-profile" src="../assets/img/arrow-profile.svg" alt />
             </span>
-          </a>
+          </router-link>
 
           <div id="user-dropdown">
             <div class="triangle-drop"></div>

@@ -5,6 +5,7 @@ import Home from '@/pages/PageHome';
 import ThreadShow from '@/pages/PageThreadShow';
 import Category from '@/pages/PageCategory';
 import Forum from '@/pages/PageForum';
+import Profile from '@/pages/PageProfile';
 import NotFound from '@/pages/PageNotFound';
 
 Vue.use(Router);
@@ -28,6 +29,18 @@ const router = new Router({
       name: 'Category',
       component: Category,
       props: true
+    },
+    {
+      path: '/me',
+      name: 'Profile',
+      component: Profile,
+      props: true
+    },
+    {
+      path: '/me/edit',
+      name: 'ProfileEdit',
+      component: Profile,
+      props: { edit: true }
     },
     {
       path: '/forum/:id',

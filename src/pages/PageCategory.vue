@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     category() {
-      return this.$state.state.categories[this.id];
+      return this.$store.state.categories[this.id];
     }
   }
 };
