@@ -1,25 +1,29 @@
 <template>
-  <div>
-    <div class="col-large push-top">
-      <h1>{{thread.title}}</h1>
-      <p>
-        By
-        <a href="#" class="link-unstyled">Robin</a>,
-        <AppDate :timestamp="thread.publishedAt" />.
-        <span
-          style="float:right; margin-top: 2px;"
-          class="hide-mobile text-faded text-small"
-        >3 replies by 3 contributors</span>
-      </p>
+  <div class="col-large push-top">
+    <h1>
+      {{thread.title}}
+      <router-link
+        class="btn-green btn-small"
+        tag="button"
+        :to="{name:'ThreadEdit', params:{id:this.id}}"
+      >Edit Thread</router-link>
+    </h1>
+    <p>
+      By
+      <a href="#" class="link-unstyled">Robin</a>,
+      <AppDate :timestamp="thread.publishedAt" />.
+      <span
+        style="float:right; margin-top: 2px;"
+        class="hide-mobile text-faded text-small"
+      >3 replies by 3 contributors</span>
+    </p>
 
-      <PostList :posts="posts" />
-      <PostEditor :threadId="id" />
-    </div>
+    <PostList :posts="posts" />
+    <PostEditor :threadId="id" />
   </div>
 </template>
 
 <script>
-import sourceData from "@/data";
 import PostList from "@/components/PostList";
 import PostEditor from "@/components/PostEditor";
 
@@ -51,4 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.thread-wrapper {
+  width: 100%;
+}
 </style>

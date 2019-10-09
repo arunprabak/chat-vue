@@ -15,13 +15,16 @@
 export default {
   props: {
     threadId: {
-      required: true,
+      required: false,
       type: String
+    },
+    post: {
+      type: Object
     }
   },
   data() {
     return {
-      text: ""
+      text: this.post ? this.post.text : ""
     };
   },
 

@@ -11,8 +11,9 @@
     </div>
 
     <div class="post-content">
-      <div>
-        <p>{{post.text}}</p>
+      <div v-if="!editing">{{post.text}}</div>
+      <div v-else class="full-width">
+        <PostEditor :post="post" />
       </div>
     </div>
 
@@ -23,13 +24,25 @@
 </template>
 
 <script>
+import PostEditor from "./PostEditor";
+
 export default {
+  components: {
+    PostEditor
+  },
   props: {
     post: {
       type: Object,
       required: true
     }
   },
+
+  data() {
+    return {
+      editing: true
+    };
+  },
+
   computed: {
     user() {
       return this.$store.state.users[this.post.userId];
